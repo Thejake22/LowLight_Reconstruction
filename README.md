@@ -187,3 +187,9 @@ The app works on whatever image you upload - it does not require the
 LOL dataset to be present, **except** for Deep Unfolding, which needs a
 checkpoint that was trained on `our485` beforehand (see previous
 section).
+
+## Results
+
+### Low Light Enhancement Comparison
+
+<img src="assets/low_light_image.png" width="800"/>
