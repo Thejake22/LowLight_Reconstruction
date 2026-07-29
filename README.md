@@ -187,27 +187,3 @@ The app works on whatever image you upload - it does not require the
 LOL dataset to be present, **except** for Deep Unfolding, which needs a
 checkpoint that was trained on `our485` beforehand (see previous
 section).
-
-## Notes on the fixes applied in this pass
-
-- **Deep Unfolding was outputting grayish/near-black-and-white images.**
-  Root cause: each block replaced its estimate with the raw output of a
-  small, randomly-initialized conv net after the gradient step, instead
-  of correcting it. With few epochs, an L1 loss, and a small dataset,
-  that setup can collapse towards a near-uniform, colour-flat prediction.
-  Fixed by making each block predict a **residual correction** on top of
-  the gradient step, and **zero-initializing** the last conv layer so
-  training starts from an exact, colour-correct identity mapping and
-  only has to learn the improvement from there. See the top-of-file
-  comment in `codes/05_deep_unfolding.py` for the full writeup.
-- **Retraining every run.** `train()` now checks for an existing
-  checkpoint first and reuses it unless you explicitly pass `--retrain`.
-- **Poisson method's brightness correction was a single flat gamma
-  value** applied identically to every pixel. Replaced with AGCWD
-  (Adaptive Gamma Correction with Weighting Distribution, see
-  `utils.agcwd_equalize`), which computes a different gamma at every
-  intensity level based on the image's own histogram - rare dark levels
-  get boosted more, common mid/bright levels less. See
-  `METHODOLOGY.md` for details.
-- `02_map_tv.py`, `04_sparse.py`, `06_metrics.py`, `config.py`,
-  `main.py` are unchanged from what you already fixed/uploaded.
