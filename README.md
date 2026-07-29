@@ -197,8 +197,8 @@ https://github.com/user-attachments/assets/80217429-e72c-48ae-8c10-b95f6a3c250b
 ### Low Light Enhancement Comparison
 Low light image
 
-<img src="asserts/low_light_image.png" width="800"/>
+<img src="assets/low_light_image.png" width="800"/>
 
 Image after deep unfolding
 
-<img src="asserts/deep_unfolding_reconstructed_image.png" width="800"/>
+<img src="assets/deep_unfolding_reconstructed_image.png" width="800"/>
